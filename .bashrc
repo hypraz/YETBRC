@@ -5,6 +5,16 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# source /etc/bashrc
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Meilleure completion du bash
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+        . /etc/bash_completion
+fi
+
 
 # ------------------------------------
 # ALIASES
@@ -13,14 +23,21 @@
 alias bashedit='sudo nvim ~/.bashrc' # Edit .bashrc
 alias bashrefresh='source ~/.bashrc' # Force terminal to recognize changes to .bashrc
 alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
-alias dallymaj="sudo apt update && apt upgrade"
+
+alias aptclean="sudo apt-get autoremove ; sudo apt-get autoclean; sudo apt-get install -f ; sudo apt-get clean"
+alias aptupgrade="sudo apt-get update ; sudo apt-get -y upgrade ; sudo apt-get -y dist-upgrade ; sudo apt-get -y autoremove ; sudo apt-get -y autoclean; sudo apt-get -y install -f ; sudo apt-get -y clean"
+
+
 
 #alias myserver="ssh user@111.111.111.111" # Example alias for SSH'ing into a server
 
-alias rm='rm -i' # Ask before removing files
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
 alias histg="history | grep" # Search history. Example usage: `histg git` to recent commands that use git
 alias myip="curl http://ipecho.net/plain; echo" # Get your current IP
-
+alias speedtest='speedtest-cli'
 alias nf='clear&&neofetch'
 alias ls='ls -lah'
 alias ll="ls -laFG" # Ideal directory listing
@@ -144,6 +161,13 @@ mkdirg ()
 	cd $1
 }
 
+function swap()         # swap 2 filenames around
+{
+    local TMPFILE=tmp.$$
+    mv $1 $TMPFILE
+    mv $2 $1
+    mv $TMPFILE $2
+}
 
 # ------------------------------------
 # Set the ultimate amazing command prompt
@@ -267,6 +291,8 @@ function __setprompt
 	PS4='\[${DARKGRAY}\]+\[${NOCOLOR}\] '
 }
 PROMPT_COMMAND='__setprompt'
+
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
 
