@@ -1,8 +1,7 @@
 # ------------------------------------
-#   ENYA'S CONFIG
+#   ENYA'S CONFIG  DEBIAN
 # ------------------------------------ 
  
-# If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
 # source /etc/bashrc
@@ -21,7 +20,7 @@ fi
 # ------------------------------------
 
 alias bashedit='sudo nvim ~/.bashrc' # Edit .bashrc
-alias bashrefresh='source ~/.bashrc' # Force terminal to recognize changes to .bashrc
+alias bashrefresh='source ~/.bashrc'
 alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
 
 alias aptclean="sudo apt-get autoremove ; sudo apt-get autoclean; sudo apt-get install -f ; sudo apt-get clean"
@@ -29,7 +28,7 @@ alias aptupgrade="sudo apt-get update ; sudo apt-get -y upgrade ; sudo apt-get -
 
 
 
-#alias myserver="ssh user@111.111.111.111" # Example alias for SSH'ing into a server
+#alias myserver="ssh user@111.111.111.111"
 
 alias rm='rm -i'
 alias cp='cp -i'
@@ -113,7 +112,7 @@ ftext ()
 	grep -iIHrn --color=always "$1" . | less -r
 }
 
-# Copy file with a progress bar
+# Copie avec une barre de progression
 cpp()
 {
 	set -e
@@ -134,7 +133,7 @@ cpp()
 	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
 
-# Copy and go to the directory
+# Copier et cd
 cpg ()
 {
 	if [ -d "$2" ];then
@@ -144,7 +143,7 @@ cpg ()
 	fi
 }
 
-# Move and go to the directory
+# Déplacé et cd
 mvg ()
 {
 	if [ -d "$2" ];then
@@ -154,14 +153,14 @@ mvg ()
 	fi
 }
 
-# Create and go to the directory
+# crée et cd
 mkdirg ()
 {
 	mkdir -p $1
 	cd $1
 }
 
-function swap()         # swap 2 filenames around
+function swap()         # Echangé le nom entre 2 fichier
 {
     local TMPFILE=tmp.$$
     mv $1 $TMPFILE
@@ -170,7 +169,7 @@ function swap()         # swap 2 filenames around
 }
 
 # ------------------------------------
-# Set the ultimate amazing command prompt
+# Set the ultimate amazing command prompt lol.
 # ------------------------------------
 
 alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
@@ -178,7 +177,7 @@ function __setprompt
 {
 	local LAST_COMMAND=$? # Must come first!
 
-	# Define colors
+	# Define couleurs
 	local LIGHTGRAY="\033[0;37m"
 	local WHITE="\033[1;37m"
 	local BLACK="\033[0;30m"
@@ -197,24 +196,24 @@ function __setprompt
 	local LIGHTCYAN="\033[1;36m"
 	local NOCOLOR="\033[0m"
 
-	# Show error exit code if there is one
+	# Erreur echoing
 	if [[ $LAST_COMMAND != 0 ]]; then
 		# PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
 		PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
 		if [[ $LAST_COMMAND == 1 ]]; then
-			PS1+="General error"
+			PS1+="Erreur General"
 		elif [ $LAST_COMMAND == 2 ]; then
 			PS1+="Missing keyword, command, or permission problem"
 		elif [ $LAST_COMMAND == 126 ]; then
 			PS1+="Permission problem or command is not an executable"
 		elif [ $LAST_COMMAND == 127 ]; then
-			PS1+="Command not found"
+			PS1+="Commande Introuvable"
 		elif [ $LAST_COMMAND == 128 ]; then
 			PS1+="Invalid argument to exit"
 		elif [ $LAST_COMMAND == 129 ]; then
 			PS1+="Fatal error signal 1"
 		elif [ $LAST_COMMAND == 130 ]; then
-			PS1+="Script terminated by Control-C"
+			PS1+="Script Stopé avec Ctrl-C"
 		elif [ $LAST_COMMAND == 131 ]; then
 			PS1+="Fatal error signal 3"
 		elif [ $LAST_COMMAND == 132 ]; then
@@ -249,8 +248,8 @@ function __setprompt
 	# Jobs
 	PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]\j"
 
-	# Network Connections (for a server - comment out for non-server)
-	PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]Net $(awk 'END {print NR}' /proc/net/tcp)"
+	# Connections Internet (Pour les serveurs)
+	# PS1+="\[${DARKGRAY}\]:\[${MAGENTA}\]Net $(awk 'END {print NR}' /proc/net/tcp)"
 
 	PS1+="\[${DARKGRAY}\])-"
 
