@@ -24,7 +24,3 @@ Linux :
 ## Using My Bashrc
 
 Open It to have a look first , then change what you want or add things.
-
-## Contact
-
-If you want to contact me you can reach me at <enzo.w.dev@gmail.com>.
