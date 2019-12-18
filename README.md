@@ -1,6 +1,7 @@
-# Simple Bashrc
+# YETBRC
 
-Yet Another Bashrc file---
+YETBRC WIP
+Inspired by `rkirti` BashRC
 
 ## Prerequisites
 
@@ -16,7 +17,7 @@ To install it, follow these steps:
 
 Linux :
 
-* Put the .Bashrc right into your User home
+* Put the .Bashrc file and .shells folder right into your User home
 
 * Refresh your shell using : Bash
 

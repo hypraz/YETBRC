@@ -1,0 +1,91 @@
+# Cute shell shortcuts
+alias l='ls -CF'
+alias ls='ls --sort=extension --color=auto -lah'
+alias ll='ls -laFG' # Ideal directory listing
+alias lal='ls -alh'
+alias la='ls -A'
+alias pms='sudo pm-suspend'
+alias psg='ps -A | grep'
+alias e='nvim'
+alias se='sudo nvim'
+alias su='su -'
+alias smi='sudo make install'
+alias e='gvim'
+
+# Alias's for CDing
+alias htdocs='cd /Applications/XAMPP/htdocs'
+alias web='cd /var/www/html'
+alias home='cd ~'
+alias cd..='cd ..'
+alias bd='cd "$OLDPWD"'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# Quickly load bashrc
+alias gogo='source ~/.bashrc'
+alias bashrefresh='source ~/.bashrc'
+alias bashedit='sudo nvim ~/.bashrc' # Edit .bashrc
+
+# Commun Aliases
+alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
+alias aptclean="sudo apt-get autoremove ; sudo apt-get autoclean; sudo apt-get install -f ; sudo apt-get clean"
+alias aptupgrade="sudo apt-get update ; sudo apt-get -y upgrade ; sudo apt-get -y dist-upgrade ; sudo apt-get -y autoremove ; sudo apt-get -y autoclean; sudo apt-get -y install -f ; sudo apt-get -y clean"
+alias histg="history | grep" # Search history. Example usage: `histg git` to recent commands that use git
+alias myip="curl http://ipecho.net/plain; echo" # Get your current IP
+alias speedtest='speedtest-cli'
+alias nf='clear&&neofetch'
+
+# Cool colors for man pages
+alias man="TERMINFO=~/.terminfo TERM=mostlike LESS=C PAGER=less man"
+
+# Enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# This one is to take care of make
+# Give me a nice, distinguishable make output
+alias make='clear && make'
+alias m='make'
+
+# Some more, to avoid mistakes
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Git Commands
+# Add and Commit are used as functions
+alias gpo='git push origin master'
+alias gp='git pull'
+alias gs='git status'
+alias gd='git diff'
+alias gr='git reflog'
+alias glf='git ls-files'
+
+# Alias's for Rights
+alias mx='chmod a+x'
+alias 000='chmod -R 000'
+alias 644='chmod -R 644'
+alias 666='chmod -R 666'
+alias 755='chmod -R 755'
+alias 777='chmod -R 777'
+
+# Alias's for archives
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
+# Useful for C/C++ work
+# R for recursive, p10 to show file paths
+alias scope='cscope -CR -p10'
