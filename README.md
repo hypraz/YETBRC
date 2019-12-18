@@ -19,7 +19,7 @@ Linux :
 
 * Put the .Bashrc file and .shells folder right into your User home
 
-* Refresh your shell using : Bash
+* Refresh your shell using : `source ~/.bashrc`
 
 
 ## Using My Bashrc
